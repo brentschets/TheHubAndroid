@@ -25,11 +25,13 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
         mAuth = FirebaseAuth.getInstance()
     }
 
+    //click event op de registratie knop
     override fun onClick(view: View?) {
         val i = view!!.id
         if(i == R.id.btn_register){
             val pw = txt_register_password.text.toString()
             val cpw = txt_register_cpassword.text.toString()
+            //check of passwords hetzelfde zijn
             if(pw != cpw){
                 Toast.makeText(applicationContext, "Passwords do not match!", Toast.LENGTH_SHORT).show()
             }else{
@@ -38,6 +40,7 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
+    //firebase authenticatie registratie
     private fun creatAccount(email: String, password: String) {
         if(!validateForm(email, password)){
             return
@@ -56,6 +59,7 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
+    //validatie van het registratie formulier
     private fun validateForm(email: String, password : String): Boolean{
         if(TextUtils.isEmpty(email)){
             Toast.makeText(applicationContext, "Enter email address!", Toast.LENGTH_SHORT).show()

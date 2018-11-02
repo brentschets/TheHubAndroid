@@ -25,7 +25,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         btn_login.setOnClickListener(this)
         btn_create_account.setOnClickListener(this)
 
-        //firebase
+        //firebase object
         mAuth = FirebaseAuth.getInstance()
     }
 
@@ -38,6 +38,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
+    //click events om naar registratie scherm te gaan of de gebruiker aan te melden
     override fun onClick(view: View?) {
         val i = view!!.id
 
@@ -51,6 +52,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
     }
 
 
+    //gebruiker aanmelden door middel van firebase authenticatie
     private fun signIn(email: String, password: String) {
         Log.e(TAG, "signIn:" + email)
         if (!validateForm(email, password)) {
@@ -75,11 +77,14 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
 
     }
 
+
+    //afmelden maar nog nergens gebruikt
     private fun logCurrentUserOut() {
         mAuth!!.signOut()
         //updateUI(null)
     }
 
+    //validatie van het login form
     private fun validateForm(email: String, password : String): Boolean{
         if(TextUtils.isEmpty(email)){
             Toast.makeText(applicationContext, "Enter email address!", Toast.LENGTH_SHORT).show()
