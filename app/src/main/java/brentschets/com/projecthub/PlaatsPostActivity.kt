@@ -3,9 +3,8 @@ package brentschets.com.projecthub
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
-import android.view.View
 import android.widget.Toast
-import com.google.firebase.database.DatabaseReference
+import brentschets.com.projecthub.Models.Post
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_plaats_post.*
 import java.text.SimpleDateFormat
@@ -17,13 +16,19 @@ class PlaatsPostActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_plaats_post)
 
+        //save post en maak de text fields leeg
         btn_post_submit.setOnClickListener {
             if(validateForm(txt_post_titel.text.toString(), sp_post_category.selectedItem.toString(),txt_post_message.text.toString())){
                 savePost()
+                txt_post_titel.text = null
+                txt_post_message.text = null
+            }else{
+                Toast.makeText(applicationContext,"Het toevoegen van een post ondervond een fout!", Toast.LENGTH_SHORT).show()
             }
         }
     }
 
+    //het opslaan van een post naar de firebase databank
     private fun savePost() {
         val titel = txt_post_titel.text.toString()
         val categorie = sp_post_category.selectedItem.toString()
@@ -34,7 +39,7 @@ class PlaatsPostActivity : AppCompatActivity() {
         //aanmaken post object en push naar databank
         val ref = FirebaseDatabase.getInstance().getReference("Posts")
         val postId = ref.push().key.toString()
-        val post = Post(postId, titel,"Brent", date, categorie, message)
+        val post = Post(postId, titel, "Brent", date, categorie, message)
 
         ref.child(postId).setValue(post).addOnCompleteListener{
             Toast.makeText(applicationContext,"Post werd succesvol toegevoegd", Toast.LENGTH_SHORT).show()
