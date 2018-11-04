@@ -66,7 +66,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                         // update UI with the signed-in user's information
                         //val user = mAuth!!.getCurrentUser()
                         //updateUI(user)
-                        val intent = Intent(this, MainActivity::class.java).apply { }
+                        val intent = Intent(this, PlaatsPostActivity::class.java).apply { }
                         startActivity(intent)
                     } else {
                         Log.e(TAG, "signIn: Fail!", task.exception)

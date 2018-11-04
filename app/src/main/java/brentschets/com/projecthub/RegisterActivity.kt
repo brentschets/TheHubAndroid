@@ -78,9 +78,4 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
 
         return true
     }
-
-
-
-
-
 }
