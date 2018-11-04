@@ -4,7 +4,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
 import android.widget.Toast
-import brentschets.com.projecthub.Models.Post
+import brentschets.com.projecthub.model.Post
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_plaats_post.*
 import java.text.SimpleDateFormat
