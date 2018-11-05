@@ -1,6 +1,4 @@
-package brentschets.com.projecthub
-
-import java.util.*
+package brentschets.com.projecthub.model
 
 class Post (val id : String,
             val title : String,
