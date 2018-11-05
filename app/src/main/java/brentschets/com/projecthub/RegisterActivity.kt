@@ -7,11 +7,13 @@ import android.text.TextUtils
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import brentschets.com.projecthub.model.User
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_register.*
 
 
-class RegisterActivity : AppCompatActivity(), View.OnClickListener {
+class RegisterActivity : AppCompatActivity() {
 
     private val TAG = "FirebaseEmailPassword"
 
@@ -20,15 +22,7 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
-        btn_register.setOnClickListener(this)
-        //firebase
-        mAuth = FirebaseAuth.getInstance()
-    }
-
-    //click event op de registratie knop
-    override fun onClick(view: View?) {
-        val i = view!!.id
-        if(i == R.id.btn_register){
+        btn_register.setOnClickListener{
             val pw = txt_register_password.text.toString()
             val cpw = txt_register_cpassword.text.toString()
             //check of passwords hetzelfde zijn
@@ -36,8 +30,23 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
                 Toast.makeText(applicationContext, "Passwords do not match!", Toast.LENGTH_SHORT).show()
             }else{
                 creatAccount(txt_register_email.text.toString(),txt_register_password.text.toString())
+
             }
         }
+        //firebase
+        mAuth = FirebaseAuth.getInstance()
+    }
+
+
+
+    private fun createUser(){
+        val username = txt_register_username.text.toString()
+        val email = txt_register_email.text.toString()
+        val ref = FirebaseDatabase.getInstance().getReference("User")
+        val userId = ref.push().key.toString()
+
+        val user = User(userId,username,email)
+        ref.child(userId).setValue(user)
     }
 
     //firebase authenticatie registratie
@@ -51,6 +60,11 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
                 // Sign in: success
                 Log.e(TAG, "creatAccount: success")
                 Toast.makeText(applicationContext, "Registration succeeded!", Toast.LENGTH_SHORT).show()
+                createUser()
+                txt_register_username.text = null
+                txt_register_email.text = null
+                txt_register_password.text = null
+                txt_register_cpassword.text = null
             } else {
                 // Sign in: fail
                 Log.e(TAG, "creatAccount: fail")
