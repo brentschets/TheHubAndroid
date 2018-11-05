@@ -22,6 +22,11 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
+        //actionbar title
+        setSupportActionBar(findViewById(R.id.my_toolbar_login))
+        val actionbar = supportActionBar
+        actionbar!!.title = "Meld je aan"
+
         btn_login.setOnClickListener(this)
         btn_create_account.setOnClickListener(this)
 

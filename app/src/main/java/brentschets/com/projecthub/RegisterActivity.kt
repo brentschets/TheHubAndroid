@@ -22,6 +22,15 @@ class RegisterActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
+
+        //actionbar back button
+        setSupportActionBar(findViewById(R.id.my_toolbar_register))
+        val actionbar = supportActionBar
+        actionbar!!.title = "Registreer Gebruiker"
+        actionbar.setDisplayHomeAsUpEnabled(true)
+        actionbar.setDisplayHomeAsUpEnabled(true)
+
+        //registreer knop
         btn_register.setOnClickListener{
             val pw = txt_register_password.text.toString()
             val cpw = txt_register_cpassword.text.toString()
@@ -37,8 +46,12 @@ class RegisterActivity : AppCompatActivity() {
         mAuth = FirebaseAuth.getInstance()
     }
 
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
+    }
 
-
+    //methode om een gebruiker aan te maken in database
     private fun createUser(){
         val username = txt_register_username.text.toString()
         val email = txt_register_email.text.toString()
