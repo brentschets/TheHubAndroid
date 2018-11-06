@@ -46,7 +46,6 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
     //click events om naar registratie scherm te gaan of de gebruiker aan te melden
     override fun onClick(view: View?) {
         val i = view!!.id
-
         if (i == R.id.btn_create_account) {
             val intent = Intent(this, RegisterActivity::class.java).apply {}
             startActivity(intent)

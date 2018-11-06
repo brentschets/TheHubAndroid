@@ -7,6 +7,7 @@ import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.Toast
 import kotlinx.android.synthetic.main.fragment_plaats_post.*
 import brentschets.com.projecthub.model.Post
@@ -19,14 +20,15 @@ class PlaatsPostFragment : Fragment(), View.OnClickListener{
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        //save post en maak de text fields leeg
-        //btn_post_submit.setOnClickListener(this)
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_plaats_post, container, false)
-
+        val view =  inflater.inflate(R.layout.fragment_plaats_post, container, false)
+        val btnSubmitPost = view.findViewById<Button>(R.id.btn_post_submit)
+        btnSubmitPost.setOnClickListener(this)
+        return view
 
     }
 
+    //click event voor save post en maak de text fields leeg
     override fun onClick(view: View?) {
         val i = view!!.id
         if(i == R.id.btn_post_submit){
