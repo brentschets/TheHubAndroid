@@ -34,8 +34,6 @@ class PlaatsPostFragment : Fragment(), View.OnClickListener{
         if(i == R.id.btn_post_submit){
             if(validateForm(txt_post_titel.text.toString(), sp_post_category.selectedItem.toString(),txt_post_message.text.toString())){
                 savePost()
-                txt_post_titel.text = null
-                txt_post_message.text = null
             }else{
                 Toast.makeText(activity,"Het toevoegen van een post ondervond een fout!", Toast.LENGTH_SHORT).show()
             }
