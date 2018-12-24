@@ -7,6 +7,7 @@ import android.text.TextUtils
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import brentschets.com.projecthub.activities.MainActivity
 import brentschets.com.projecthub.model.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
@@ -36,7 +37,7 @@ class RegisterActivity : AppCompatActivity() {
             val cpw = txt_register_cpassword.text.toString()
             //check of passwords hetzelfde zijn
             if(pw != cpw){
-                Toast.makeText(applicationContext, "Passwords do not match!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(MainActivity.getContext(), "Passwords do not match!", Toast.LENGTH_SHORT).show()
             }else{
                 creatAccount(txt_register_email.text.toString(),txt_register_password.text.toString())
 

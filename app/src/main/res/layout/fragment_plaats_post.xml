@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#4D9CA0"
-    tools:context=".PlaatsPostFragment">
+    tools:context=".fragments.PlaatsPostFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <Button

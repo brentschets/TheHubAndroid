@@ -1,4 +1,4 @@
-package brentschets.com.projecthub
+package brentschets.com.projecthub.fragments
 
 
 import android.os.Bundle
@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
+import brentschets.com.projecthub.R
 import kotlinx.android.synthetic.main.fragment_plaats_post.*
 import brentschets.com.projecthub.model.Post
 import com.google.firebase.database.FirebaseDatabase

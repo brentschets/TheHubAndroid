@@ -1,4 +1,4 @@
-package brentschets.com.projecthub
+package brentschets.com.projecthub.fragments
 
 
 
@@ -9,23 +9,16 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
 import android.widget.LinearLayout
+import brentschets.com.projecthub.R
 import brentschets.com.projecthub.adapter.PostAdapter
 import brentschets.com.projecthub.model.Post
 import com.google.firebase.database.*
-import kotlinx.android.synthetic.main.fragment_list.*
 import kotlinx.android.synthetic.main.fragment_list.view.*
 import java.util.ArrayList
 
 
-class ListFragment : Fragment() {
-
-    lateinit var editTextTitle : EditText
-    lateinit var editTextOwner : EditText
-    lateinit var editTextCategory: EditText
-    lateinit var editTextDate : EditText
-    lateinit var editTextMessage : EditText
+class PostListFragment : Fragment() {
 
     lateinit var ref : DatabaseReference
 

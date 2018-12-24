@@ -1,4 +1,4 @@
-package brentschets.com.projecthub
+package brentschets.com.projecthub.fragments
 
 
 import android.os.Bundle
