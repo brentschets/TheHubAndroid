@@ -2,15 +2,14 @@ package brentschets.com.projecthub.viewmodels
 
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
-import android.content.Intent
-import android.support.v4.content.ContextCompat.startActivity
 import android.text.TextUtils
 import android.util.Log
 import android.widget.Toast
 import brentschets.com.projecthub.activities.MainActivity
+import brentschets.com.projecthub.model.User
 import brentschets.com.projecthub.utils.PreferenceUtil
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.database.FirebaseDatabase
 
 class AccountViewModel: ViewModel() {
 
@@ -27,6 +26,12 @@ class AccountViewModel: ViewModel() {
         private set
 
     /**
+     * Bool of user al dan niet gerigistreerd is
+     */
+    var isRegistered = MutableLiveData<Boolean>()
+        private set
+
+    /**
      * tag om mee te geven wanneer in de log
      */
     private val TAG = "FirebaseEmailPassword"
@@ -35,18 +40,21 @@ class AccountViewModel: ViewModel() {
      * firebase object
      */
     private var mAuth: FirebaseAuth? = null
+    private var ref: FirebaseDatabase? = null
 
     init {
         username = PreferenceUtil.getUsername()
         isLoggedIn.value = PreferenceUtil.getToken() != ""
         //firebase object
         mAuth = FirebaseAuth.getInstance()
+        ref = FirebaseDatabase.getInstance()
+        isRegistered.value = PreferenceUtil.getToken() != ""
     }
 
     //gebruiker aanmelden door middel van firebase authenticatie
     fun login(email: String, password: String) {
         Log.e(TAG, "signIn:" + email)
-        if (!validateForm(email, password)) {
+        if (!validateFormLogin(email, password)) {
             return
         }
 
@@ -58,6 +66,7 @@ class AccountViewModel: ViewModel() {
                 var user = mAuth!!.currentUser
                 if (user != null) {
                     username = user.displayName
+                    PreferenceUtil.setUsername(username.toString())
                     PreferenceUtil.setToken(user.uid)
                 }
 
@@ -67,8 +76,36 @@ class AccountViewModel: ViewModel() {
         }
     }
 
+    fun register(email: String, password: String, username:String){
+
+        if(!validateFormRegister(email,password)){
+            return
+        }
+        //user aanmaken in de Realtime database
+        val dbRef = ref!!.getReference("User")
+        val userId = dbRef.push().key.toString()
+        val user = User(userId, username, email)
+        dbRef.child(userId).setValue(user)
+
+        //User aan maken in de authentication database
+        Log.e(TAG, "createAccount" + email)
+        mAuth!!.createUserWithEmailAndPassword(email, password).addOnCompleteListener{
+            task ->
+            if (task.isSuccessful){
+                //succesvolle registratie
+                onRetrieveRegisterSuccess()
+                Log.e(TAG,"createAccount: success" )
+                Toast.makeText(MainActivity.getContext(), "Registratie voltooid!", Toast.LENGTH_SHORT).show()
+            }else {
+                //registratie mislukt
+                Log.e(TAG, "createAccount: fail")
+                Toast.makeText(MainActivity.getContext(), "Registratie mislukt!", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
     //validatie van het login form
-    private fun validateForm(email: String, password : String): Boolean{
+    private fun validateFormLogin(email: String, password : String): Boolean{
         if(TextUtils.isEmpty(email)){
             Toast.makeText(MainActivity.getContext(), "Enter email address!", Toast.LENGTH_SHORT).show()
             return false
@@ -82,6 +119,27 @@ class AccountViewModel: ViewModel() {
         return true
     }
 
+
+    //validatie van het registratie formulier
+    private fun validateFormRegister(email: String, password : String): Boolean{
+        if(TextUtils.isEmpty(email)){
+            Toast.makeText(MainActivity.getContext(), "Enter email address!", Toast.LENGTH_SHORT).show()
+            return false
+        }
+
+        if(TextUtils.isEmpty(password)){
+            Toast.makeText(MainActivity.getContext(), "Enter password!", Toast.LENGTH_SHORT).show()
+            return false
+        }
+
+        if(password.length < 6){
+            Toast.makeText(MainActivity.getContext(), "Password to short minimum of 6 characters", Toast.LENGTH_SHORT).show()
+            return false
+        }
+
+        return true
+    }
+
     /**
      * Functie voor het behandelen van het succesvol aanmelden
      *
@@ -89,5 +147,9 @@ class AccountViewModel: ViewModel() {
      */
     private fun onRetrieveLoginSuccess() {
         isLoggedIn.value = true
+    }
+
+    private fun onRetrieveRegisterSuccess(){
+        isRegistered.value = true
     }
 }

@@ -1,6 +1,5 @@
 package brentschets.com.projecthub.activities
 
-import android.app.Application
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.support.v7.app.AppCompatActivity
@@ -14,7 +13,6 @@ import brentschets.com.projecthub.fragments.PostListFragment
 import brentschets.com.projecthub.fragments.PlaatsPostFragment
 import brentschets.com.projecthub.viewmodels.AccountViewModel
 import kotlinx.android.synthetic.main.activity_main.*
-import java.security.AccessController.getContext
 
 class MainActivity : AppCompatActivity() {
 
