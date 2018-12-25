@@ -9,7 +9,10 @@ import brentschets.com.projecthub.activities.MainActivity
 import brentschets.com.projecthub.model.User
 import brentschets.com.projecthub.utils.PreferenceUtil
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 
 class AccountViewModel: ViewModel() {
 
@@ -62,7 +65,7 @@ class AccountViewModel: ViewModel() {
             task ->
             if(task.isSuccessful){
                 Toast.makeText(MainActivity.getContext(), "Succesvol ingelogd", Toast.LENGTH_SHORT).show()
-                onRetrieveLoginSuccess()
+                onRetrieveLoginSuccess(email)
                 var user = mAuth!!.currentUser
                 if (user != null) {
                     username = user.displayName
@@ -142,11 +145,32 @@ class AccountViewModel: ViewModel() {
 
     /**
      * Functie voor het behandelen van het succesvol aanmelden
-     *
-     * zal token instellen en opslaan, en isLoggedIn in de VM op true zetten
      */
-    private fun onRetrieveLoginSuccess() {
+    private fun onRetrieveLoginSuccess(email: String) {
         isLoggedIn.value = true
+
+        val dbRef = ref!!.getReference("User")
+        dbRef.addValueEventListener(object : ValueEventListener {
+            override fun onCancelled(p0: DatabaseError) {
+                //Toast bij een error bij het ophalen van de data
+                Toast.makeText(MainActivity.getContext(), "Er ging iets fout bij het aanmelden", Toast.LENGTH_SHORT).show()
+            }
+            override fun onDataChange(p0: DataSnapshot) {
+                val userList = ArrayList<User>()
+                if (p0.exists()) {
+                    userList.clear()
+                    for (h in p0.children) {
+                        val user = h.getValue(User::class.java)
+                        userList.add(user!!)
+                    }
+                }
+                for (i in userList) {
+                    if (i.email == email) {
+                        PreferenceUtil.setUsername(i.username)
+                    }
+                }
+            }
+        })
     }
 
     private fun onRetrieveRegisterSuccess(){

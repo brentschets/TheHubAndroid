@@ -38,7 +38,7 @@ class PostListFragment : Fragment() {
         ref.addValueEventListener(object : ValueEventListener{
 
             override fun onCancelled(p0: DatabaseError) {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                //Toast bij een error bij het ophalen van de data
             }
 
             override fun onDataChange(p0: DataSnapshot) {
