@@ -40,7 +40,7 @@ class AccountViewModel: ViewModel() {
     private val TAG = "FirebaseEmailPassword"
 
     /**
-     * firebase object
+     * Firebase objecten
      */
     private var mAuth: FirebaseAuth? = null
     private var ref: FirebaseDatabase? = null
@@ -54,7 +54,9 @@ class AccountViewModel: ViewModel() {
         isRegistered.value = PreferenceUtil.getToken() != ""
     }
 
-    //gebruiker aanmelden door middel van firebase authenticatie
+    /**
+     * Aanmelden van een gebruiker door middel van Firebase
+     */
     fun login(email: String, password: String) {
         Log.e(TAG, "signIn:" + email)
         if (!validateFormLogin(email, password)) {
@@ -79,6 +81,9 @@ class AccountViewModel: ViewModel() {
         }
     }
 
+    /**
+     * Registreren van een gebruiker
+     */
     fun register(email: String, password: String, username:String){
 
         if(!validateFormRegister(email,password)){
@@ -107,7 +112,19 @@ class AccountViewModel: ViewModel() {
         }
     }
 
-    //validatie van het login form
+    /**
+     * Methode om de gebruiker af te melden
+     */
+    fun signOut(){
+        mAuth!!.signOut()
+        PreferenceUtil.deletePreferences()
+        isLoggedIn.value = false
+        isRegistered.value = false
+    }
+
+    /**
+     * Validatie op het login form
+     */
     private fun validateFormLogin(email: String, password : String): Boolean{
         if(TextUtils.isEmpty(email)){
             Toast.makeText(MainActivity.getContext(), "Enter email address!", Toast.LENGTH_SHORT).show()
@@ -123,7 +140,9 @@ class AccountViewModel: ViewModel() {
     }
 
 
-    //validatie van het registratie formulier
+    /**
+     * Validatie op het registreer form
+     */
     private fun validateFormRegister(email: String, password : String): Boolean{
         if(TextUtils.isEmpty(email)){
             Toast.makeText(MainActivity.getContext(), "Enter email address!", Toast.LENGTH_SHORT).show()
@@ -173,6 +192,9 @@ class AccountViewModel: ViewModel() {
         })
     }
 
+    /**
+     * Functie voor het succesvol registreren van een gebruiker
+     */
     private fun onRetrieveRegisterSuccess(){
         isRegistered.value = true
     }

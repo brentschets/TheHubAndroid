@@ -1,29 +1,104 @@
 package brentschets.com.projecthub.fragments
 
 
+import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProviders
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 
 import brentschets.com.projecthub.R
-
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+import brentschets.com.projecthub.activities.MainActivity
+import brentschets.com.projecthub.viewmodels.AccountViewModel
+import kotlinx.android.synthetic.main.fragment_account.*
+import kotlin.math.sign
 
 /**
- * A simple [Fragment] subclass.
+ * Een [Fragment] voor het weergeven van de gegevens van de gebruiker
  *
  */
-class AccountFragment : Fragment() {
+class AccountFragment : Fragment(), View.OnClickListener {
+
+
+    /**
+     * [AccountViewModel] met de data over account
+     */
+    private lateinit var accountViewModel: AccountViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_account, container, false)
+        val view = inflater.inflate(R.layout.fragment_account, container, false)
+
+        val btnLogOut = view.findViewById<Button>(R.id.btn_account_signout)
+        btnLogOut.setOnClickListener(this)
+
+        accountViewModel = ViewModelProviders.of(requireActivity()).get(AccountViewModel::class.java)
+
+        return view
+    }
+
+    override fun onClick(view: View?) {
+        val i = view!!.id
+        println("IN CLICK METHODE")
+        if(i == R.id.btn_account_signout){
+            println("IN BUTTON CLICK")
+            signOut()
+        }
+    }
+
+    /**
+     * Instantieer de listeners
+     */
+    private fun initListeners() {
+        //aangemeld en parantactivity bijhouden
+        val loggedIn  = accountViewModel.isLoggedIn
+
+        //indien aangemeld naar lijst gaan
+        loggedIn.observe(this, Observer {
+            if (loggedIn.value == false) {
+                //simuleert een button click op lijst om er voor te zorgen dat juiste
+                //item actief is + zet fragment etc automatisch juist
+                replaceFragment(LoginFragment())
+            }
+        })
+    }
+
+    /**
+     * Stop de listeners
+     */
+    @Suppress("UNUSED_EXPRESSION")
+    private fun stopListeners() {
+        //afmeldknop
+        btn_account_signout.setOnClickListener { null }
+    }
+
+    private fun signOut(){
+        accountViewModel.signOut()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        initListeners()
+    }
+
+    override fun onStop() {
+        stopListeners()
+        super.onStop()
+    }
+
+    /**
+     * methode voor een fragmenttransaction
+     */
+    private fun replaceFragment(fragment : Fragment){
+        val fragmentTransaction = fragmentManager!!.beginTransaction()
+        fragmentTransaction.replace(R.id.fragment_container, fragment)
+        fragmentTransaction.commit()
     }
 
 
