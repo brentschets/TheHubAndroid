@@ -26,6 +26,10 @@ class PostViewModel: ViewModel() {
      */
     private var ref: FirebaseDatabase? = null
 
+    init{
+        ref = FirebaseDatabase.getInstance()
+    }
+
     /**
      * Methode om een methode toe te voegen
      */
