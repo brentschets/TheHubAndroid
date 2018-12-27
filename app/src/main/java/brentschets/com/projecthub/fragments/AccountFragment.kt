@@ -4,6 +4,7 @@ package brentschets.com.projecthub.fragments
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
+import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
@@ -14,6 +15,7 @@ import android.widget.Button
 
 import brentschets.com.projecthub.R
 import brentschets.com.projecthub.activities.MainActivity
+import brentschets.com.projecthub.databinding.FragmentAccountBinding
 import brentschets.com.projecthub.viewmodels.AccountViewModel
 import kotlinx.android.synthetic.main.fragment_account.*
 import kotlin.math.sign
@@ -30,15 +32,27 @@ class AccountFragment : Fragment(), View.OnClickListener {
      */
     private lateinit var accountViewModel: AccountViewModel
 
+    /**
+     * De [FragmentAccountBinding] dat we gebruiken voor de effeciteve databinding
+     */
+    private lateinit var binding: FragmentAccountBinding
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_account, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_account, container, false)
+
+        //Accountviewmodel vullen
+        accountViewModel = ViewModelProviders.of(requireActivity()).get(AccountViewModel::class.java)
+
+        val view = binding.root
+
+        binding.accountViewModel = accountViewModel
+        binding.setLifecycleOwner(activity)
 
         val btnLogOut = view.findViewById<Button>(R.id.btn_account_signout)
         btnLogOut.setOnClickListener(this)
 
-        accountViewModel = ViewModelProviders.of(requireActivity()).get(AccountViewModel::class.java)
 
         return view
     }

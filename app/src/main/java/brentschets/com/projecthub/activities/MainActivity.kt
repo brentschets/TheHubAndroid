@@ -2,6 +2,7 @@ package brentschets.com.projecthub.activities
 
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
+import android.databinding.DataBindingUtil
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
@@ -12,6 +13,7 @@ import brentschets.com.projecthub.fragments.LoginFragment
 import brentschets.com.projecthub.fragments.PostListFragment
 import brentschets.com.projecthub.fragments.PlaatsPostFragment
 import brentschets.com.projecthub.viewmodels.AccountViewModel
+import brentschets.com.projecthub.databinding.ActivityMainBinding
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -21,6 +23,10 @@ class MainActivity : AppCompatActivity() {
      */
     private lateinit var accountViewModel: AccountViewModel
 
+    /**
+     * De [ActivityMainBinding] dat we gebruiken voor de effeciteve databinding met de [MainActivity]
+     */
+    private lateinit var binding: ActivityMainBinding
 
     /**
      * Listener voor de bottom navigation view dat er voor zorgt dat juiste fragment getoond wordt on click.
@@ -53,7 +59,12 @@ class MainActivity : AppCompatActivity() {
 
         super.onCreate(savedInstanceState)
         accountViewModel = ViewModelProviders.of(this).get(AccountViewModel::class.java)
-        setContentView(R.layout.activity_main)
+
+        //main activity binden
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        binding.accountViewModel = accountViewModel
+        binding.setLifecycleOwner(this)
+
         if(accountViewModel.isLoggedIn.value == true){
             bottom_navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
             replaceFragment(PostListFragment())

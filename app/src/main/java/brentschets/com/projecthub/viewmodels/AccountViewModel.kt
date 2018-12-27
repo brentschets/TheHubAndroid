@@ -2,6 +2,7 @@ package brentschets.com.projecthub.viewmodels
 
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
+import android.databinding.Bindable
 import android.text.TextUtils
 import android.util.Log
 import android.widget.Toast
@@ -51,7 +52,6 @@ class AccountViewModel: ViewModel() {
         //firebase object
         mAuth = FirebaseAuth.getInstance()
         ref = FirebaseDatabase.getInstance()
-        isRegistered.value = PreferenceUtil.getToken() != ""
     }
 
     /**
