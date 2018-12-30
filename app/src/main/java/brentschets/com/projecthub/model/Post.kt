@@ -5,4 +5,14 @@ class Post (val id : String,
             val owner : String,
             val date : String,
             val category : String,
-            val message : String)
+            val message : String){
+
+    constructor() : this(
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+    )
+}
