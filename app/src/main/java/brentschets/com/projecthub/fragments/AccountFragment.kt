@@ -59,9 +59,7 @@ class AccountFragment : Fragment(), View.OnClickListener {
 
     override fun onClick(view: View?) {
         val i = view!!.id
-        println("IN CLICK METHODE")
         if(i == R.id.btn_account_signout){
-            println("IN BUTTON CLICK")
             signOut()
         }
     }

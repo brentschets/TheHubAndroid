@@ -20,7 +20,7 @@ class AccountViewModel: ViewModel() {
     /**
      * De gebruikersnaam van de aangemelde persoon
      */
-    var username: String?
+    var username = MutableLiveData<String>()
         private set
 
     /**
@@ -47,7 +47,7 @@ class AccountViewModel: ViewModel() {
     private var ref: FirebaseDatabase? = null
 
     init {
-        username = PreferenceUtil.getUsername()
+        username.value = PreferenceUtil.getUsername()
         isLoggedIn.value = PreferenceUtil.getToken() != ""
         //firebase object
         mAuth = FirebaseAuth.getInstance()
@@ -70,9 +70,8 @@ class AccountViewModel: ViewModel() {
                 onRetrieveLoginSuccess(email)
                 var user = mAuth!!.currentUser
                 if (user != null) {
-                    username = user.displayName
-                    PreferenceUtil.setUsername(username.toString())
                     PreferenceUtil.setToken(user.uid)
+
                 }
 
             }else{
@@ -185,7 +184,9 @@ class AccountViewModel: ViewModel() {
                 }
                 for (i in userList) {
                     if (i.email == email) {
+                        username.value = i.username
                         PreferenceUtil.setUsername(i.username)
+                        println(i.username)
                     }
                 }
             }
