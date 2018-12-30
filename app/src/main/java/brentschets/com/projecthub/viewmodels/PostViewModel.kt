@@ -1,33 +1,44 @@
 package brentschets.com.projecthub.viewmodels
 
+import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
-import android.arch.lifecycle.ViewModelProviders
-import android.support.v4.app.FragmentActivity
 import android.text.TextUtils
-import android.view.View
 import android.widget.Toast
-import brentschets.com.projecthub.R.id.*
 import brentschets.com.projecthub.activities.MainActivity
-import brentschets.com.projecthub.adapter.PostAdapter
 import brentschets.com.projecthub.model.Post
 import brentschets.com.projecthub.utils.PreferenceUtil
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import kotlinx.android.synthetic.main.fragment_list.view.*
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.ArrayList
 
 class PostViewModel: ViewModel() {
 
     /**
+     * Een lijst met alle posts
+     */
+    var postList = ArrayList<Post>()
+        private set
+
+    /**
+     * De geselecteerde lunch
+     */
+    val selectedPost = MutableLiveData<Post>()
+
+    /**
      * Firebase object
      */
-    private var ref: FirebaseDatabase? = null
+    var ref: FirebaseDatabase? = null
 
     init{
         ref = FirebaseDatabase.getInstance()
+    }
+
+    init {
+        getPosts()
     }
 
     /**
@@ -47,6 +58,39 @@ class PostViewModel: ViewModel() {
             Toast.makeText(MainActivity.getContext(),"Post werd succesvol toegevoegd", Toast.LENGTH_SHORT).show()
         }
     }
+
+    /**
+     * returnt de lijst van alle lunches als MutableLiveData
+     */
+    fun setSelectedPost(postId: String) {
+        selectedPost.value = postList.firstOrNull { it.id == postId }
+    }
+
+    fun getPosts(){
+        val dbRef = ref!!.getReference("Posts")
+
+        postList = ArrayList()
+
+        dbRef.addValueEventListener(object : ValueEventListener{
+
+            override fun onCancelled(p0: DatabaseError) {
+                Toast.makeText(MainActivity.getContext(), "Er liep iets fout bij het ophalen van de posts", Toast.LENGTH_LONG).show()
+            }
+
+            override fun onDataChange(p0: DataSnapshot) {
+                if(p0.exists()){
+                    postList.clear()
+                    for (h in p0.children){
+                        val post = h.getValue(Post::class.java)
+                        postList.add(post!!)
+                    }
+
+                }
+            }
+        })
+    }
+
+
 
     /**
      * Validatie voor het toevoegen van een post
