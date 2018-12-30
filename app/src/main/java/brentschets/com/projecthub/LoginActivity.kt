@@ -46,7 +46,6 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
     //click events om naar registratie scherm te gaan of de gebruiker aan te melden
     override fun onClick(view: View?) {
         val i = view!!.id
-
         if (i == R.id.btn_create_account) {
             val intent = Intent(this, RegisterActivity::class.java).apply {}
             startActivity(intent)
@@ -71,7 +70,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                         // update UI with the signed-in user's information
                         //val user = mAuth!!.getCurrentUser()
                         //updateUI(user)
-                        val intent = Intent(this, PlaatsPostActivity::class.java).apply { }
+                        val intent = Intent(this, MainActivity::class.java).apply { }
                         startActivity(intent)
                     } else {
                         Log.e(TAG, "signIn: Fail!", task.exception)

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/add"
+        android:title="add"
+        android:icon="@drawable/ic_outline_add_24px"/>
+
+    <item
+        android:id="@+id/list"
+        android:title="list"
+        android:icon="@drawable/ic_outline_dehaze_24px"/>
+
+    <item
+        android:id="@+id/account"
+        android:title="account"
+        android:icon="@drawable/ic_outline_account_circle_24px"/>
+
+</menu>
