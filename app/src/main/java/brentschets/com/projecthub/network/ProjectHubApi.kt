@@ -4,6 +4,10 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 
+/**
+ * Dit is de netwerk klasse hier worden alle references aangemaakt voor Firebase maar ook de lokale persistentie van Firebase wordt hier
+ * gebruikt
+ */
 class ProjectHubApi {
 
     /**
@@ -31,5 +35,7 @@ class ProjectHubApi {
         ref = FirebaseDatabase.getInstance()
         userRef = ref!!.getReference("User")
         postRef = ref!!.getReference("Posts")
+        userRef!!.keepSynced(true)
+        postRef!!.keepSynced(true)
     }
 }
