@@ -1,14 +1,118 @@
-<?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".fragments.DetailPostFragment">
+<?xml version="1.0" encoding="utf-8"?><!-- A fragment to show the details of a lunch, uses data binding -->
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="postViewModel"
+            type="brentschets.com.projecthub.viewmodels.PostViewModel" />
+    </data>
+
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:background="@color/colorPrimary">
 
-</FrameLayout>
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/frameLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:context=".activities.MainActivity">
+
+            <TextView
+                android:id="@+id/txt_detail_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{postViewModel.getSelectedPost().title}"
+                android:textSize="30sp"
+                app:layout_constraintEnd_toStartOf="@+id/guideline17"
+                app:layout_constraintStart_toStartOf="@+id/guideline16"
+                app:layout_constraintTop_toTopOf="@+id/guideline18"
+                tools:text="Titel van een post" />
+
+            <TextView
+                android:id="@+id/txt_detail_author"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@{`Geplaatst door `+ postViewModel.getSelectedPost().owner}"
+                app:layout_constraintStart_toStartOf="@+id/guideline16"
+                app:layout_constraintTop_toBottomOf="@+id/txt_detail_text"
+                tools:text="Woltex" />
+
+            <android.support.constraint.Guideline
+                android:id="@+id/guideline16"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.1" />
+
+            <android.support.constraint.Guideline
+                android:id="@+id/guideline17"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.9" />
+
+            <android.support.constraint.Guideline
+                android:id="@+id/guideline18"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.1" />
+
+            <android.support.constraint.Guideline
+                android:id="@+id/guideline19"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.5" />
+
+            <TextView
+                android:id="@+id/txt_detail_datum"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                android:text="@{postViewModel.getSelectedPost().date}"
+                app:layout_constraintStart_toStartOf="@+id/guideline19"
+                app:layout_constraintTop_toBottomOf="@+id/txt_detail_text"
+                tools:text="02/11/2018" />
+
+            <TextView
+                android:id="@+id/txt_detail_content"
+                android:layout_width="309dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="@{postViewModel.getSelectedPost().message}"
+                app:layout_constraintEnd_toStartOf="@+id/guideline17"
+                app:layout_constraintHorizontal_bias="0.493"
+                app:layout_constraintStart_toStartOf="@+id/guideline16"
+                app:layout_constraintTop_toBottomOf="@+id/txt_detail_author"
+                tools:text="Ut rhoncus suscipit urna ac malesuada. Nunc sapien lacus, vehicula vitae vulputate et, mattis sed dui. Sed lectus lacus, pulvinar at nibh eget, sagittis venenatis ante. Ut mollis ultrices ipsum sit amet finibus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Praesent id consectetur felis. Morbi suscipit elit vitae quam cursus varius. Curabitur vel sollicitudin neque, sed finibus elit. Nulla tempus sem et ex ullamcorper fermentum. Sed vel magna ac neque fermentum varius ut et leo. Nam et laoreet ex. Vestibulum orci lacus, mollis in lacus sit amet, viverra dapibus nisi. Suspendisse interdum lacus sodales, gravida ante ut, tincidunt elit. Maecenas facilisis dignissim pretium." />
+
+            <Button
+                android:id="@+id/btn_delete"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:background="@drawable/button_style"
+                android:text="Verwijder je bericht"
+                android:textColor="#fff"
+                app:layout_constraintEnd_toStartOf="@+id/guideline17"
+                app:layout_constraintStart_toStartOf="@+id/guideline16"
+                app:layout_constraintTop_toBottomOf="@+id/txt_detail_content"
+                tools:text="Verwijder je bericht"
+                android:visibility="@{safeUnbox(postViewModel.isOwnerPost)? View.VISIBLE : View.GONE}"/>
+
+
+        </android.support.constraint.ConstraintLayout>
+
+    </ScrollView>
+
+</layout>
