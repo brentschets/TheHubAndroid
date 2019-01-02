@@ -51,6 +51,7 @@ class DetailPostFragment : Fragment() {
         }
     }
 
+    @Suppress("UNUSED_EXPRESSION")
     private fun stopListeners(){
         btn_delete.setOnClickListener{ null }
     }

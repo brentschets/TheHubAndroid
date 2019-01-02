@@ -11,7 +11,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import brentschets.com.projecthub.R
+import brentschets.com.projecthub.activities.MainActivity
 import brentschets.com.projecthub.databinding.FragmentAccountBinding
+import brentschets.com.projecthub.utils.FragmentUtil
 import brentschets.com.projecthub.viewmodels.AccountViewModel
 import kotlinx.android.synthetic.main.fragment_account.*
 
@@ -71,7 +73,7 @@ class AccountFragment : Fragment(), View.OnClickListener {
             if (loggedIn.value == false) {
                 //simuleert een button click op lijst om er voor te zorgen dat juiste
                 //item actief is + zet fragment etc automatisch juist
-                replaceFragment(LoginFragment())
+                FragmentUtil.replace(LoginFragment(), requireActivity() as MainActivity)
             }
         })
     }
@@ -98,15 +100,4 @@ class AccountFragment : Fragment(), View.OnClickListener {
         stopListeners()
         super.onStop()
     }
-
-    /**
-     * methode voor een fragmenttransaction
-     */
-    private fun replaceFragment(fragment : Fragment){
-        val fragmentTransaction = fragmentManager!!.beginTransaction()
-        fragmentTransaction.replace(R.id.fragment_container, fragment)
-        fragmentTransaction.commit()
-    }
-
-
 }

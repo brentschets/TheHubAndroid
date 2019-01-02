@@ -6,7 +6,6 @@ import android.databinding.DataBindingUtil
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
-import android.support.v4.app.Fragment
 import brentschets.com.projecthub.R
 import brentschets.com.projecthub.fragments.AccountFragment
 import brentschets.com.projecthub.fragments.LoginFragment
@@ -14,6 +13,7 @@ import brentschets.com.projecthub.fragments.PostListFragment
 import brentschets.com.projecthub.fragments.PlaatsPostFragment
 import brentschets.com.projecthub.viewmodels.AccountViewModel
 import brentschets.com.projecthub.databinding.ActivityMainBinding
+import brentschets.com.projecthub.utils.FragmentUtil
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -35,17 +35,17 @@ class MainActivity : AppCompatActivity() {
         when(item.itemId){
             R.id.list -> {
                 println("list pressed")
-                replaceFragment(PostListFragment())
+                FragmentUtil.replace(PostListFragment(), parentActivity = instance!!)
                 return@OnNavigationItemSelectedListener true
             }
             R.id.add -> {
                 println("add pressed")
-                replaceFragment(PlaatsPostFragment())
+                FragmentUtil.replace(PlaatsPostFragment(), parentActivity = instance!!)
                 return@OnNavigationItemSelectedListener true
             }
             R.id.account -> {
                 println("account pressed")
-                replaceFragment(AccountFragment())
+                FragmentUtil.replace(AccountFragment(), parentActivity = instance!!)
                 return@OnNavigationItemSelectedListener true
             }
         }
@@ -67,17 +67,11 @@ class MainActivity : AppCompatActivity() {
 
         if(accountViewModel.isLoggedIn.value == true){
             bottom_navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
-            replaceFragment(PostListFragment())
+            FragmentUtil.replace(PostListFragment(), parentActivity = instance!!)
         }else{
-            replaceFragment(LoginFragment())
+            FragmentUtil.replace(LoginFragment(), parentActivity = instance!!)
         }
 
-    }
-
-    private fun replaceFragment(fragment : Fragment){
-        val fragmentTransaction = supportFragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.fragment_container, fragment)
-        fragmentTransaction.commit()
     }
 
 
