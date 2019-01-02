@@ -1,4 +1,23 @@
 <resources>
+    <!-- Applicatie naam -->
+    <string name="app_name">ProjectHub</string>
+
     <!-- Account -->
     <string name="account_greeting">Hallo</string>
+    <string name="account_logout">Afmelden</string>
+    <string name="account_privacy_policy">Privacy policy</string>
+
+    <!-- detail -->
+    <string name="detail_delete">Verwijder je bericht</string>
+
+    <!-- login -->
+    <string name="login_email">Emailadres</string>
+    <string name="login_password">Wachtwoord</string>
+    <string name="login_login">Aanmelden</string>
+    <string name="login_register">Nog geen account, registreer u dan hier</string>
+
+    <!-- plaats post -->
+    <string name="place_placemessage">Plaats Bericht</string>
+    <string name="place_title">Titel</string>
+    <string name="place_message">Bericht</string>
 </resources>

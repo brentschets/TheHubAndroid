@@ -1,5 +1,7 @@
-<?xml version="1.0" encoding="utf-8"?><!-- A fragment to show the details of a lunch, uses data binding -->
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<!-- A fragment to show the details of a post, uses data binding -->
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
@@ -102,7 +104,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
                 android:background="@drawable/button_style"
-                android:text="Verwijder je bericht"
+                android:text="@string/detail_delete"
                 android:textColor="#fff"
                 app:layout_constraintEnd_toStartOf="@+id/guideline17"
                 app:layout_constraintStart_toStartOf="@+id/guideline16"
