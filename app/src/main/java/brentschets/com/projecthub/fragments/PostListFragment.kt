@@ -1,5 +1,7 @@
 package brentschets.com.projecthub.fragments
 
+import android.arch.lifecycle.MutableLiveData
+import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -29,7 +31,7 @@ class PostListFragment : Fragment() {
     /**
      * Lijst van posts
      */
-    private lateinit var postList: ArrayList<Post>
+    private lateinit var postList: MutableLiveData<ArrayList<Post>>
 
     /**
      * [PostAdapter] die de lijst vult.
@@ -56,6 +58,8 @@ class PostListFragment : Fragment() {
         //list vullen met posts van postviewmodel
         postList = postViewModel.postList
 
+        adapter = PostAdapter(postList, requireActivity() as MainActivity)
+
         ref.addValueEventListener(object : ValueEventListener{
 
             override fun onCancelled(p0: DatabaseError) {
@@ -64,14 +68,25 @@ class PostListFragment : Fragment() {
 
             override fun onDataChange(p0: DataSnapshot) {
                 if(p0.exists()){
-                    adapter = PostAdapter(postList, requireActivity() as MainActivity)
                     view.recyclerView.adapter = adapter
-                    adapter.notifyDataSetChanged()
                 }
             }
         })
         return view
     }
+
+    private fun initListeners(){
+        postList.observe(this, Observer {
+            adapter.notifyDataSetChanged()
+        })
+    }
+
+    override fun onStart() {
+        super.onStart()
+        initListeners()
+    }
+
+
 
 
 

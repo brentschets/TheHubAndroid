@@ -20,13 +20,23 @@ class PostViewModel: ViewModel() {
     /**
      * Een lijst met alle posts
      */
-    var postList = ArrayList<Post>()
+    var postList = MutableLiveData<ArrayList<Post>>()
         private set
+
+    /**
+     * Lijst van alle posts
+     */
+    var posts = ArrayList<Post>()
 
     /**
      * De geselecteerde lunch
      */
     val selectedPost = MutableLiveData<Post>()
+
+    /**
+     * Eigenaar van de geselecteerde post
+     */
+    var isOwnerPost = MutableLiveData<Boolean>()
 
     /**
      * Firebase object
@@ -39,10 +49,12 @@ class PostViewModel: ViewModel() {
 
     init {
         getPosts()
+        isOwnerPost.value = false
+        postList.value = posts
     }
 
     /**
-     * Methode om een methode toe te voegen
+     * Methode om een post toe te voegen
      */
     fun savePost(titel: String, categorie: String, message: String) {
 
@@ -63,13 +75,13 @@ class PostViewModel: ViewModel() {
      * returnt de lijst van alle lunches als MutableLiveData
      */
     fun setSelectedPost(postId: String) {
-        selectedPost.value = postList.firstOrNull { it.id == postId }
+        selectedPost.value = posts.firstOrNull { it.id == postId }
     }
 
     fun getPosts(){
         val dbRef = ref!!.getReference("Posts")
 
-        postList = ArrayList()
+        posts = ArrayList()
 
         dbRef.addValueEventListener(object : ValueEventListener{
 
@@ -79,15 +91,29 @@ class PostViewModel: ViewModel() {
 
             override fun onDataChange(p0: DataSnapshot) {
                 if(p0.exists()){
-                    postList.clear()
+                    posts.clear()
                     for (h in p0.children){
                         val post = h.getValue(Post::class.java)
-                        postList.add(post!!)
+                        posts.add(post!!)
                     }
-
+                    postList.value = posts
                 }
             }
         })
+    }
+
+    fun deletePost(postId: String){
+        val dbRef = ref!!.getReference("Posts")
+        dbRef.child(postId).removeValue().addOnCompleteListener{ task ->
+            if(task.isSuccessful)
+                Toast.makeText(MainActivity.getContext(), "Uw bericht werd succesvol verwijderd!", Toast.LENGTH_SHORT).show()
+            getPosts()
+        }
+
+    }
+
+    fun ownerPost(post: Post){
+        isOwnerPost.value = PreferenceUtil.getUsername() == post.owner
     }
 
 

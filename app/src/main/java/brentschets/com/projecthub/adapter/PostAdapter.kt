@@ -1,5 +1,6 @@
 package brentschets.com.projecthub.adapter
 
+import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModelProviders
 import android.support.v4.app.Fragment
 import android.support.v7.widget.RecyclerView
@@ -13,7 +14,7 @@ import brentschets.com.projecthub.fragments.DetailPostFragment
 import brentschets.com.projecthub.model.Post
 import brentschets.com.projecthub.viewmodels.PostViewModel
 
-class PostAdapter(private val postList : ArrayList<Post>, private val parentActivity: MainActivity) : RecyclerView.Adapter<PostAdapter.ViewHolder> () {
+class PostAdapter(private val postList : MutableLiveData<ArrayList<Post>>, private val parentActivity: MainActivity) : RecyclerView.Adapter<PostAdapter.ViewHolder> () {
 
     /**
      * [PostViewModel] met de data over account
@@ -31,18 +32,18 @@ class PostAdapter(private val postList : ArrayList<Post>, private val parentActi
         onClickListener = View.OnClickListener { v ->
             val selectedPost = v.tag as Post
             postViewModel.setSelectedPost(selectedPost.id)
-
+            postViewModel.ownerPost(selectedPost)
             //fragment transaction
             replaceFragment(DetailPostFragment())
         }
     }
 
     override fun getItemCount(): Int {
-        return postList.size
+        return postList.value!!.size
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val post : Post = postList[position]
+        val post : Post = postList.value!![position]
         holder.textTitle.text = post.title
         holder.textCategory.text = post.category
         holder.textDate.text = post.date
