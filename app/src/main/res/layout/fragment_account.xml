@@ -36,6 +36,7 @@
             android:layout_marginBottom="8dp"
             android:text="@string/account_greeting"
             android:textSize="24sp"
+            android:textColor="#fff"
             app:layout_constraintBottom_toTopOf="@+id/textView2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
@@ -47,6 +48,7 @@
             android:layout_marginBottom="8dp"
             android:text="@{accountViewModel.username}"
             android:textSize="24sp"
+            android:textColor="#fff"
             app:layout_constraintBottom_toTopOf="@+id/guideline5"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.501"
