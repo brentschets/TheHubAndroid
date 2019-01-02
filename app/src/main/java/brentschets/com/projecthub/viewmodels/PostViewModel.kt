@@ -6,6 +6,7 @@ import android.text.TextUtils
 import android.widget.Toast
 import brentschets.com.projecthub.activities.MainActivity
 import brentschets.com.projecthub.model.Post
+import brentschets.com.projecthub.network.ProjectHubApi
 import brentschets.com.projecthub.utils.PreferenceUtil
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -39,13 +40,9 @@ class PostViewModel: ViewModel() {
     var isOwnerPost = MutableLiveData<Boolean>()
 
     /**
-     * Firebase object
+     * [ProjectHubApi] Instantie van de api
      */
-    var ref: FirebaseDatabase? = null
-
-    init{
-        ref = FirebaseDatabase.getInstance()
-    }
+    var projectApi = ProjectHubApi()
 
     init {
         getPosts()
@@ -62,8 +59,8 @@ class PostViewModel: ViewModel() {
         val date = sdf.format(Date())
 
         //aanmaken post object en push naar databank
-        val dbRef = ref!!.getReference("Posts")
-        val postId = dbRef.push().key.toString()
+        val dbRef = projectApi.postRef
+        val postId = dbRef!!.push().key.toString()
         val post = Post(postId, titel, PreferenceUtil.getUsername() , date, categorie, message)
 
         dbRef.child(postId).setValue(post).addOnCompleteListener{
@@ -79,11 +76,11 @@ class PostViewModel: ViewModel() {
     }
 
     fun getPosts(){
-        val dbRef = ref!!.getReference("Posts")
+        val dbRef = projectApi.postRef
 
         posts = ArrayList()
 
-        dbRef.addValueEventListener(object : ValueEventListener{
+        dbRef!!.addValueEventListener(object : ValueEventListener{
 
             override fun onCancelled(p0: DatabaseError) {
                 Toast.makeText(MainActivity.getContext(), "Er liep iets fout bij het ophalen van de posts", Toast.LENGTH_LONG).show()
@@ -103,8 +100,8 @@ class PostViewModel: ViewModel() {
     }
 
     fun deletePost(postId: String){
-        val dbRef = ref!!.getReference("Posts")
-        dbRef.child(postId).removeValue().addOnCompleteListener{ task ->
+        val dbRef = projectApi.postRef
+        dbRef!!.child(postId).removeValue().addOnCompleteListener{ task ->
             if(task.isSuccessful)
                 Toast.makeText(MainActivity.getContext(), "Uw bericht werd succesvol verwijderd!", Toast.LENGTH_SHORT).show()
             getPosts()

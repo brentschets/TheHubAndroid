@@ -24,9 +24,9 @@ import java.util.ArrayList
 class PostListFragment : Fragment() {
 
     /**
-     * Firebase DatabaseObject
+     * Firebase DatabaseReference voor de adapter
      */
-    lateinit var ref : DatabaseReference
+    var ref : DatabaseReference ?= null
 
     /**
      * Lijst van posts
@@ -53,14 +53,14 @@ class PostListFragment : Fragment() {
         postViewModel = ViewModelProviders.of(requireActivity()).get(PostViewModel::class.java)
 
         //ref voor datachanges
-        ref = postViewModel.ref!!.getReference("Posts")
+        ref = postViewModel.projectApi.postRef
 
         //list vullen met posts van postviewmodel
         postList = postViewModel.postList
 
         adapter = PostAdapter(postList, requireActivity() as MainActivity)
 
-        ref.addValueEventListener(object : ValueEventListener{
+        ref!!.addValueEventListener(object : ValueEventListener{
 
             override fun onCancelled(p0: DatabaseError) {
                 Toast.makeText(MainActivity.getContext(), "Er liep iets fout bij het ophalen van de posts", Toast.LENGTH_LONG).show()
