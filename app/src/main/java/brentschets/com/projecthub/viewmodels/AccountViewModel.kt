@@ -4,10 +4,9 @@ import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import android.text.TextUtils
 import android.util.Log
-import android.widget.Toast
-import brentschets.com.projecthub.activities.MainActivity
 import brentschets.com.projecthub.model.User
 import brentschets.com.projecthub.network.ProjectHubApi
+import brentschets.com.projecthub.utils.MessageUtil
 import brentschets.com.projecthub.utils.PreferenceUtil
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -61,7 +60,7 @@ class AccountViewModel: ViewModel() {
         projectApi.mAuth!!.signInWithEmailAndPassword(email, password).addOnCompleteListener {
             task ->
             if(task.isSuccessful){
-                Toast.makeText(MainActivity.getContext(), "Succesvol ingelogd", Toast.LENGTH_SHORT).show()
+                MessageUtil.showToast("Succesvol aangemeld")
                 onRetrieveLoginSuccess(email)
                 var user = projectApi.mAuth!!.currentUser
                 if (user != null) {
@@ -69,7 +68,7 @@ class AccountViewModel: ViewModel() {
                 }
 
             }else{
-                Toast.makeText(MainActivity.getContext(), "Er is een fout opgetreden bij het aanmelden", Toast.LENGTH_SHORT).show()
+                MessageUtil.showToast("Er is iets foutgelopen bij het aanmelden")
             }
         }
     }
@@ -96,11 +95,11 @@ class AccountViewModel: ViewModel() {
                 //succesvolle registratie
                 onRetrieveRegisterSuccess()
                 Log.e(TAG,"createAccount: success" )
-                Toast.makeText(MainActivity.getContext(), "Registratie voltooid!", Toast.LENGTH_SHORT).show()
+                MessageUtil.showToast("Succesvol geregistreerd")
             }else {
                 //registratie mislukt
                 Log.e(TAG, "createAccount: fail")
-                Toast.makeText(MainActivity.getContext(), "Registratie mislukt!", Toast.LENGTH_SHORT).show()
+                MessageUtil.showToast("Registratie mislukt")
             }
         }
     }
@@ -120,12 +119,12 @@ class AccountViewModel: ViewModel() {
      */
     private fun validateFormLogin(email: String, password : String): Boolean{
         if(TextUtils.isEmpty(email)){
-            Toast.makeText(MainActivity.getContext(), "Enter email address!", Toast.LENGTH_SHORT).show()
+            MessageUtil.showToast("Vul emailadres in")
             return false
         }
 
         if(TextUtils.isEmpty(password)){
-            Toast.makeText(MainActivity.getContext(), "Enter password!", Toast.LENGTH_SHORT).show()
+            MessageUtil.showToast("Vul wachtwoord in")
             return false
         }
 
@@ -138,17 +137,17 @@ class AccountViewModel: ViewModel() {
      */
     private fun validateFormRegister(email: String, password : String): Boolean{
         if(TextUtils.isEmpty(email)){
-            Toast.makeText(MainActivity.getContext(), "Enter email address!", Toast.LENGTH_SHORT).show()
+            MessageUtil.showToast("Vul emailadres in")
             return false
         }
 
         if(TextUtils.isEmpty(password)){
-            Toast.makeText(MainActivity.getContext(), "Enter password!", Toast.LENGTH_SHORT).show()
+            MessageUtil.showToast("Vul wachtwoord in")
             return false
         }
 
         if(password.length < 6){
-            Toast.makeText(MainActivity.getContext(), "Password to short minimum of 6 characters", Toast.LENGTH_SHORT).show()
+            MessageUtil.showToast("Password te kort gelieve een wachtwoord te kiezen van minstnes 6 karakters")
             return false
         }
 
@@ -165,7 +164,7 @@ class AccountViewModel: ViewModel() {
         dbRef!!.addValueEventListener(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {
                 //Toast bij een error bij het ophalen van de data
-                Toast.makeText(MainActivity.getContext(), "Er ging iets fout bij het aanmelden", Toast.LENGTH_SHORT).show()
+                MessageUtil.showToast("Er ging iets fout bij het aanmelden")
             }
             override fun onDataChange(p0: DataSnapshot) {
                 val userList = ArrayList<User>()

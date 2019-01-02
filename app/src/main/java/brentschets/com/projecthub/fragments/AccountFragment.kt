@@ -3,22 +3,17 @@ package brentschets.com.projecthub.fragments
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
-import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-
 import brentschets.com.projecthub.R
-import brentschets.com.projecthub.activities.MainActivity
 import brentschets.com.projecthub.databinding.FragmentAccountBinding
 import brentschets.com.projecthub.viewmodels.AccountViewModel
 import kotlinx.android.synthetic.main.fragment_account.*
-import kotlin.math.sign
 
 /**
  * Een [Fragment] voor het weergeven van de gegevens van de gebruiker

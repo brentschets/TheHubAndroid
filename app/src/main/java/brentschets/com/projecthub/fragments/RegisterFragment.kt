@@ -9,9 +9,9 @@ import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import brentschets.com.projecthub.R
 import brentschets.com.projecthub.activities.MainActivity
+import brentschets.com.projecthub.utils.MessageUtil
 import brentschets.com.projecthub.viewmodels.AccountViewModel
 import kotlinx.android.synthetic.main.fragment_register.*
 
@@ -78,7 +78,7 @@ class RegisterFragment: Fragment() {
      */
     private fun register(){
         if(txt_register_password.text.toString() != txt_register_cpassword.text.toString()){
-            Toast.makeText(MainActivity.getContext(), "Wachtwoorden komen niet overeen", Toast.LENGTH_SHORT).show()
+            MessageUtil.showToast("Wachtwoorden komen niet overeen")
         }else{
             accountViewModel.register(
                     txt_register_email.text.toString(),
