@@ -1,0 +1,128 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>PostViewModel - app</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">app</a>&nbsp;/&nbsp;<a href="../index.html">brentschets.com.projecthub.viewmodels</a>&nbsp;/&nbsp;<a href="./index.html">PostViewModel</a><br/>
+<br/>
+<h1>PostViewModel</h1>
+<code><span class="keyword">class </span><span class="identifier">PostViewModel</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">ViewModel</span></code>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-init-.html">&lt;init&gt;</a></p>
+</td>
+<td>
+<code><span class="identifier">PostViewModel</span><span class="symbol">(</span><span class="symbol">)</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="is-owner-post.html">isOwnerPost</a></p>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">isOwnerPost</span><span class="symbol">: </span><span class="identifier">MutableLiveData</span><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a><span class="symbol">&gt;</span></code>
+<p>Eigenaar van de geselecteerde post</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="post-list.html">postList</a></p>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">postList</span><span class="symbol">: </span><span class="identifier">MutableLiveData</span><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-array-list/index.html"><span class="identifier">ArrayList</span></a><span class="symbol">&lt;</span><a href="../../brentschets.com.projecthub.model/-post/index.html"><span class="identifier">Post</span></a><span class="symbol">&gt;</span><span class="symbol">&gt;</span></code>
+<p>Een lijst met alle posts</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="posts.html">posts</a></p>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">posts</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-array-list/index.html"><span class="identifier">ArrayList</span></a><span class="symbol">&lt;</span><a href="../../brentschets.com.projecthub.model/-post/index.html"><span class="identifier">Post</span></a><span class="symbol">&gt;</span></code>
+<p>Lijst van alle posts</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="project-api.html">projectApi</a></p>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">projectApi</span><span class="symbol">: </span><a href="../../brentschets.com.projecthub.network/-project-hub-api/index.html"><span class="identifier">ProjectHubApi</span></a></code>
+<p><a href="../../brentschets.com.projecthub.network/-project-hub-api/index.html">ProjectHubApi</a> Instantie van de api</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="selected-post.html">selectedPost</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">selectedPost</span><span class="symbol">: </span><span class="identifier">MutableLiveData</span><span class="symbol">&lt;</span><a href="../../brentschets.com.projecthub.model/-post/index.html"><span class="identifier">Post</span></a><span class="symbol">&gt;</span></code>
+<p>De geselecteerde lunch</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="delete-post.html">deletePost</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">deletePost</span><span class="symbol">(</span><span class="identifier" id="brentschets.com.projecthub.viewmodels.PostViewModel$deletePost(kotlin.String)/postId">postId</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="get-posts.html">getPosts</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">getPosts</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="owner-post.html">ownerPost</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">ownerPost</span><span class="symbol">(</span><span class="identifier" id="brentschets.com.projecthub.viewmodels.PostViewModel$ownerPost(brentschets.com.projecthub.model.Post)/post">post</span><span class="symbol">:</span>&nbsp;<a href="../../brentschets.com.projecthub.model/-post/index.html"><span class="identifier">Post</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="save-post.html">savePost</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">savePost</span><span class="symbol">(</span><span class="identifier" id="brentschets.com.projecthub.viewmodels.PostViewModel$savePost(kotlin.String, kotlin.String, kotlin.String)/titel">titel</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="brentschets.com.projecthub.viewmodels.PostViewModel$savePost(kotlin.String, kotlin.String, kotlin.String)/categorie">categorie</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="brentschets.com.projecthub.viewmodels.PostViewModel$savePost(kotlin.String, kotlin.String, kotlin.String)/message">message</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Methode om een post toe te voegen</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="set-selected-post.html">setSelectedPost</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">setSelectedPost</span><span class="symbol">(</span><span class="identifier" id="brentschets.com.projecthub.viewmodels.PostViewModel$setSelectedPost(kotlin.String)/postId">postId</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>returnt de lijst van alle lunches als MutableLiveData</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="validate-form.html">validateForm</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">validateForm</span><span class="symbol">(</span><span class="identifier" id="brentschets.com.projecthub.viewmodels.PostViewModel$validateForm(kotlin.String, kotlin.String, kotlin.String)/titel">titel</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="brentschets.com.projecthub.viewmodels.PostViewModel$validateForm(kotlin.String, kotlin.String, kotlin.String)/categorie">categorie</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="brentschets.com.projecthub.viewmodels.PostViewModel$validateForm(kotlin.String, kotlin.String, kotlin.String)/message">message</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code>
+<p>Validatie voor het toevoegen van een post</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>
