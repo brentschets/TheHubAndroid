@@ -9,9 +9,10 @@ import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import brentschets.com.projecthub.R
 import brentschets.com.projecthub.activities.MainActivity
+import brentschets.com.projecthub.utils.FragmentUtil
+import brentschets.com.projecthub.utils.MessageUtil
 import brentschets.com.projecthub.viewmodels.AccountViewModel
 import kotlinx.android.synthetic.main.fragment_register.*
 
@@ -56,7 +57,7 @@ class RegisterFragment: Fragment() {
             if (registered.value == true) {
                 //simuleert een button click op lijst om er voor te zorgen dat juiste
                 //item actief is + zet fragment etc automatisch juist
-                replaceFragment(LoginFragment())
+                FragmentUtil.replace(LoginFragment(), requireActivity() as MainActivity)
             }
         })
 
@@ -78,7 +79,7 @@ class RegisterFragment: Fragment() {
      */
     private fun register(){
         if(txt_register_password.text.toString() != txt_register_cpassword.text.toString()){
-            Toast.makeText(MainActivity.getContext(), "Wachtwoorden komen niet overeen", Toast.LENGTH_SHORT).show()
+            MessageUtil.showToast("Wachtwoorden komen niet overeen")
         }else{
             accountViewModel.register(
                     txt_register_email.text.toString(),
@@ -95,14 +96,5 @@ class RegisterFragment: Fragment() {
     override fun onStop() {
         stopListeners()
         super.onStop()
-    }
-
-    /**
-     * methode voor een fragmenttransaction
-     */
-    private fun replaceFragment(fragment : Fragment){
-        val fragmentTransaction = fragmentManager!!.beginTransaction()
-        fragmentTransaction.replace(R.id.fragment_container, fragment)
-        fragmentTransaction.commit()
     }
 }
