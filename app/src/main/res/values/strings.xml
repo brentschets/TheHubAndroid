@@ -14,10 +14,13 @@
     <string name="login_email">Emailadres</string>
     <string name="login_password">Wachtwoord</string>
     <string name="login_login">Aanmelden</string>
-    <string name="login_register">Nog geen account, registreer u dan hier</string>
+    <string name="login_register">Nog geen account? Registreer u dan hier!</string>
 
     <!-- plaats post -->
     <string name="place_placemessage">Plaats Bericht</string>
     <string name="place_title">Titel</string>
     <string name="place_message">Bericht</string>
+
+    <!-- registreer -->
+    <string name="account_already_account">Al een account? Meld je dan aan!</string>
 </resources>
