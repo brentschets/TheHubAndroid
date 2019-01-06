@@ -1,0 +1,11 @@
+$dokka.format:html
+$dokka.linkExtension:html
+
+brentschets.com.projecthub.activities
+brentschets.com.projecthub.adapter
+brentschets.com.projecthub.constants
+brentschets.com.projecthub.fragments
+brentschets.com.projecthub.model
+brentschets.com.projecthub.network
+brentschets.com.projecthub.utils
+brentschets.com.projecthub.viewmodels

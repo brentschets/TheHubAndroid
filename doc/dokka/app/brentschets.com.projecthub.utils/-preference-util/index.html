@@ -1,0 +1,77 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>PreferenceUtil - app</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">app</a>&nbsp;/&nbsp;<a href="../index.html">brentschets.com.projecthub.utils</a>&nbsp;/&nbsp;<a href="./index.html">PreferenceUtil</a><br/>
+<br/>
+<h1>PreferenceUtil</h1>
+<code><span class="keyword">object </span><span class="identifier">PreferenceUtil</span></code>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="shared-preferences.html">sharedPreferences</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">sharedPreferences</span><span class="symbol">: </span><a href="https://developer.android.com/reference/android/content/SharedPreferences.html"><span class="identifier">SharedPreferences</span></a></code>
+<p>De shared preferences in <a href="https://developer.android.com/reference/android/content/Context.html#MODE_PRIVATE">Context.MODE_PRIVATE</a> zodat andere applicaties hier niet aan kunnen</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="delete-preferences.html">deletePreferences</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">deletePreferences</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Verwijderd alle sharedPreferences</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="get-token.html">getToken</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">getToken</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">?</span></code>
+<p>Haalt de token op van de shared preferences</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="get-username.html">getUsername</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">getUsername</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">?</span></code>
+<p>Haalt de gebruikersnaam op van de shared preferences</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="set-token.html">setToken</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">setToken</span><span class="symbol">(</span><span class="identifier" id="brentschets.com.projecthub.utils.PreferenceUtil$setToken(kotlin.String)/token">token</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Slaat de token op in de shared prefences</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="set-username.html">setUsername</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">setUsername</span><span class="symbol">(</span><span class="identifier" id="brentschets.com.projecthub.utils.PreferenceUtil$setUsername(kotlin.String)/username">username</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Slaat de gebruikersnaam op in de shared prefences</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>
