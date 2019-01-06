@@ -1,5 +1,7 @@
-<?xml version="1.0" encoding="utf-8"?><!-- A fragment to show the details of a lunch, uses data binding -->
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<!-- A fragment to show the details of a post, uses data binding -->
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
@@ -29,6 +31,7 @@
                 android:layout_height="wrap_content"
                 android:text="@{postViewModel.getSelectedPost().title}"
                 android:textSize="30sp"
+                android:textColor="#fff"
                 app:layout_constraintEnd_toStartOf="@+id/guideline17"
                 app:layout_constraintStart_toStartOf="@+id/guideline16"
                 app:layout_constraintTop_toTopOf="@+id/guideline18"
@@ -39,6 +42,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:textColor="#fff"
                 android:text="@{`Geplaatst door `+ postViewModel.getSelectedPost().owner}"
                 app:layout_constraintStart_toStartOf="@+id/guideline16"
                 app:layout_constraintTop_toBottomOf="@+id/txt_detail_text"
@@ -79,6 +83,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="16dp"
+                android:textColor="#fff"
                 android:text="@{postViewModel.getSelectedPost().date}"
                 app:layout_constraintStart_toStartOf="@+id/guideline19"
                 app:layout_constraintTop_toBottomOf="@+id/txt_detail_text"
@@ -86,10 +91,12 @@
 
             <TextView
                 android:id="@+id/txt_detail_content"
-                android:layout_width="309dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 android:text="@{postViewModel.getSelectedPost().message}"
+                android:textColor="#fff"
+                android:textSize="20sp"
                 app:layout_constraintEnd_toStartOf="@+id/guideline17"
                 app:layout_constraintHorizontal_bias="0.493"
                 app:layout_constraintStart_toStartOf="@+id/guideline16"
@@ -102,7 +109,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
                 android:background="@drawable/button_style"
-                android:text="Verwijder je bericht"
+                android:text="@string/detail_delete"
                 android:textColor="#fff"
                 app:layout_constraintEnd_toStartOf="@+id/guideline17"
                 app:layout_constraintStart_toStartOf="@+id/guideline16"

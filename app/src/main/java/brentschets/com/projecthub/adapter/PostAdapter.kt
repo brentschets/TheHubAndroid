@@ -2,7 +2,6 @@ package brentschets.com.projecthub.adapter
 
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModelProviders
-import android.support.v4.app.Fragment
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +11,7 @@ import brentschets.com.projecthub.R
 import brentschets.com.projecthub.activities.MainActivity
 import brentschets.com.projecthub.fragments.DetailPostFragment
 import brentschets.com.projecthub.model.Post
+import brentschets.com.projecthub.utils.FragmentUtil
 import brentschets.com.projecthub.viewmodels.PostViewModel
 
 class PostAdapter(private val postList : MutableLiveData<ArrayList<Post>>, private val parentActivity: MainActivity) : RecyclerView.Adapter<PostAdapter.ViewHolder> () {
@@ -34,7 +34,7 @@ class PostAdapter(private val postList : MutableLiveData<ArrayList<Post>>, priva
             postViewModel.setSelectedPost(selectedPost.id)
             postViewModel.ownerPost(selectedPost)
             //fragment transaction
-            replaceFragment(DetailPostFragment())
+            FragmentUtil.replace(DetailPostFragment(), parentActivity)
         }
     }
 
@@ -65,14 +65,5 @@ class PostAdapter(private val postList : MutableLiveData<ArrayList<Post>>, priva
         val textCategory = itemView.findViewById(R.id.txt_category) as TextView
         val textDate = itemView.findViewById(R.id.txt_date) as TextView
         val textAuthor = itemView.findViewById(R.id.txt_author) as TextView
-    }
-
-    /**
-     * methode voor een fragmenttransaction
-     */
-    private fun replaceFragment(fragment : Fragment){
-        val fragmentTransaction = parentActivity.supportFragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.fragment_container, fragment)
-        fragmentTransaction.commit()
     }
 }

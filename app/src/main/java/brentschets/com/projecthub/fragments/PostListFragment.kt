@@ -5,17 +5,14 @@ import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
-import android.widget.Toast
 import brentschets.com.projecthub.R
 import brentschets.com.projecthub.activities.MainActivity
 import brentschets.com.projecthub.adapter.PostAdapter
 import brentschets.com.projecthub.model.Post
+import brentschets.com.projecthub.utils.MessageUtil
 import brentschets.com.projecthub.viewmodels.PostViewModel
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.fragment_list.view.*
@@ -24,9 +21,9 @@ import java.util.ArrayList
 class PostListFragment : Fragment() {
 
     /**
-     * Firebase DatabaseObject
+     * Firebase DatabaseReference voor de adapter
      */
-    lateinit var ref : DatabaseReference
+    var ref : DatabaseReference ?= null
 
     /**
      * Lijst van posts
@@ -53,17 +50,17 @@ class PostListFragment : Fragment() {
         postViewModel = ViewModelProviders.of(requireActivity()).get(PostViewModel::class.java)
 
         //ref voor datachanges
-        ref = postViewModel.ref!!.getReference("Posts")
+        ref = postViewModel.projectApi.postRef
 
         //list vullen met posts van postviewmodel
         postList = postViewModel.postList
 
         adapter = PostAdapter(postList, requireActivity() as MainActivity)
 
-        ref.addValueEventListener(object : ValueEventListener{
+        ref!!.addValueEventListener(object : ValueEventListener{
 
             override fun onCancelled(p0: DatabaseError) {
-                Toast.makeText(MainActivity.getContext(), "Er liep iets fout bij het ophalen van de posts", Toast.LENGTH_LONG).show()
+                MessageUtil.showToast("Er liep iets fout bij het ophalen van de posts")
             }
 
             override fun onDataChange(p0: DataSnapshot) {

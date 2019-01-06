@@ -13,6 +13,7 @@ import android.widget.Button
 import android.widget.TextView
 import brentschets.com.projecthub.R
 import brentschets.com.projecthub.activities.MainActivity
+import brentschets.com.projecthub.utils.FragmentUtil
 import brentschets.com.projecthub.viewmodels.AccountViewModel
 import kotlinx.android.synthetic.main.fragment_login.*
 
@@ -77,7 +78,7 @@ class LoginFragment: Fragment(), View.OnClickListener {
      * Gaat naar het registratiefragment
      */
     private fun register() {
-        replaceFragment(RegisterFragment())
+        FragmentUtil.replace(RegisterFragment(), requireActivity() as MainActivity)
     }
 
     /**
@@ -96,14 +97,4 @@ class LoginFragment: Fragment(), View.OnClickListener {
         stopListeners()
         super.onStop()
     }
-
-    /**
-     * methode voor fragmenttransaction
-     */
-    private fun replaceFragment(fragment : Fragment){
-        val fragmentTransaction = fragmentManager!!.beginTransaction()
-        fragmentTransaction.replace(R.id.fragment_container, fragment)
-        fragmentTransaction.commit()
-    }
-
 }
