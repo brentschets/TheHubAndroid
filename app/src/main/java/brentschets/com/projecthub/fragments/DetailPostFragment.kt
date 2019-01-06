@@ -8,7 +8,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import brentschets.com.projecthub.R
+import brentschets.com.projecthub.activities.MainActivity
 import brentschets.com.projecthub.databinding.FragmentDetailPostBinding
+import brentschets.com.projecthub.utils.FragmentUtil
 import brentschets.com.projecthub.viewmodels.PostViewModel
 import kotlinx.android.synthetic.main.fragment_detail_post.*
 
@@ -47,7 +49,7 @@ class DetailPostFragment : Fragment() {
         //delete button
         btn_delete.setOnClickListener{
             postViewModel.deletePost(postViewModel.selectedPost.value!!.id)
-            replaceFragment(PostListFragment())
+            FragmentUtil.replace(PostListFragment(), requireActivity() as MainActivity)
         }
     }
 
@@ -65,14 +67,4 @@ class DetailPostFragment : Fragment() {
         stopListeners()
         super.onStop()
     }
-
-    /**
-     * methode voor fragmenttransaction
-     */
-    private fun replaceFragment(fragment : Fragment){
-        val fragmentTransaction = fragmentManager!!.beginTransaction()
-        fragmentTransaction.replace(R.id.fragment_container, fragment)
-        fragmentTransaction.commit()
-    }
-
 }
