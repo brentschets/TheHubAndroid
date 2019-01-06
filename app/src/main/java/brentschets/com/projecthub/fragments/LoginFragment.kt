@@ -20,30 +20,19 @@ import kotlinx.android.synthetic.main.fragment_login.*
 /**
  * Een [Fragment] waar een gebruiker zich kan aanmelden of kan doorklikken naar registreren.
  */
-class LoginFragment: Fragment(), View.OnClickListener {
+class LoginFragment: Fragment() {
     /**
      * [AccountViewModel] met de data over account
      */
     private lateinit var accountViewModel: AccountViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+
         val view = inflater.inflate(R.layout.fragment_login, container, false)
-        val btnLogin = view.findViewById<Button>(R.id.btn_login)
-        btnLogin.setOnClickListener(this)
-        val btnRegister = view.findViewById<TextView>(R.id.btn_create_account)
-        btnRegister.setOnClickListener(this)
+
         accountViewModel = ViewModelProviders.of(requireActivity()).get(AccountViewModel::class.java)
+
         return view
-    }
-
-
-    override fun onClick(view: View?) {
-        val i = view!!.id
-        if(i == R.id.btn_login){
-            login()
-        }else if( i == R.id.btn_create_account){
-            register()
-        }
     }
 
     /**
@@ -62,6 +51,14 @@ class LoginFragment: Fragment(), View.OnClickListener {
                 (requireActivity() as AppCompatActivity).startActivity(intent)
             }
         })
+
+        btn_login.setOnClickListener{
+            login()
+        }
+
+        btn_create_account.setOnClickListener{
+            register()
+        }
     }
 
     /**

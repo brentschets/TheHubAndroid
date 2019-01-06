@@ -27,7 +27,7 @@ class AccountViewModel: ViewModel() {
         private set
 
     /**
-     * Bool of user al dan niet gerigistreerd is
+     * Bool of user al dan niet geregistreerd is
      */
     var isRegistered = MutableLiveData<Boolean>()
         private set

@@ -1,0 +1,92 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>PostListFragment - app</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">app</a>&nbsp;/&nbsp;<a href="../index.html">brentschets.com.projecthub.fragments</a>&nbsp;/&nbsp;<a href="./index.html">PostListFragment</a><br/>
+<br/>
+<h1>PostListFragment</h1>
+<code><span class="keyword">class </span><span class="identifier">PostListFragment</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">Fragment</span></code>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-init-.html">&lt;init&gt;</a></p>
+</td>
+<td>
+<code><span class="identifier">PostListFragment</span><span class="symbol">(</span><span class="symbol">)</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="adapter.html">adapter</a></p>
+</td>
+<td>
+<code><span class="keyword">lateinit</span> <span class="keyword">var </span><span class="identifier">adapter</span><span class="symbol">: </span><a href="../../brentschets.com.projecthub.adapter/-post-adapter/index.html"><span class="identifier">PostAdapter</span></a></code>
+<p><a href="../../brentschets.com.projecthub.adapter/-post-adapter/index.html">PostAdapter</a> die de lijst vult.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="post-list.html">postList</a></p>
+</td>
+<td>
+<code><span class="keyword">lateinit</span> <span class="keyword">var </span><span class="identifier">postList</span><span class="symbol">: </span><span class="identifier">MutableLiveData</span><span class="symbol">&lt;</span><a href="https://developer.android.com/reference/java/util/ArrayList.html"><span class="identifier">ArrayList</span></a><span class="symbol">&lt;</span><a href="../../brentschets.com.projecthub.model/-post/index.html"><span class="identifier">Post</span></a><span class="symbol">&gt;</span><span class="symbol">&gt;</span></code>
+<p>Lijst van posts</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="post-view-model.html">postViewModel</a></p>
+</td>
+<td>
+<code><span class="keyword">lateinit</span> <span class="keyword">var </span><span class="identifier">postViewModel</span><span class="symbol">: </span><a href="../../brentschets.com.projecthub.viewmodels/-post-view-model/index.html"><span class="identifier">PostViewModel</span></a></code>
+<p><a href="../../brentschets.com.projecthub.viewmodels/-post-view-model/index.html">PostViewModel</a> met de data van de posts</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="ref.html">ref</a></p>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">ref</span><span class="symbol">: </span><span class="identifier">DatabaseReference</span><span class="symbol">?</span></code>
+<p>Firebase DatabaseReference voor de adapter</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="init-listeners.html">initListeners</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">initListeners</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="on-create-view.html">onCreateView</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">onCreateView</span><span class="symbol">(</span><span class="identifier" id="brentschets.com.projecthub.fragments.PostListFragment$onCreateView(android.view.LayoutInflater, android.view.ViewGroup, android.os.Bundle)/inflater">inflater</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/view/LayoutInflater.html"><span class="identifier">LayoutInflater</span></a><span class="symbol">, </span><span class="identifier" id="brentschets.com.projecthub.fragments.PostListFragment$onCreateView(android.view.LayoutInflater, android.view.ViewGroup, android.os.Bundle)/container">container</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/view/ViewGroup.html"><span class="identifier">ViewGroup</span></a><span class="symbol">?</span><span class="symbol">, </span><span class="identifier" id="brentschets.com.projecthub.fragments.PostListFragment$onCreateView(android.view.LayoutInflater, android.view.ViewGroup, android.os.Bundle)/savedInstanceState">savedInstanceState</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/os/Bundle.html"><span class="identifier">Bundle</span></a><span class="symbol">?</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://developer.android.com/reference/android/view/View.html"><span class="identifier">View</span></a><span class="symbol">?</span></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="on-start.html">onStart</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">onStart</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

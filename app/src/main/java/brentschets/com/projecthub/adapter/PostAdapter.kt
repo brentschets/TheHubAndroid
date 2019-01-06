@@ -28,7 +28,7 @@ class PostAdapter(private val postList : MutableLiveData<ArrayList<Post>>, priva
     private val onClickListener: View.OnClickListener
 
     init {
-        //indien op een post geklikt haal uit de tag desbetreffende post op en toon detailpagina
+        //indien op een post geklikt haal uit de tag de desbetreffende post op en toon detailpagina
         onClickListener = View.OnClickListener { v ->
             val selectedPost = v.tag as Post
             postViewModel.setSelectedPost(selectedPost.id)
@@ -38,10 +38,20 @@ class PostAdapter(private val postList : MutableLiveData<ArrayList<Post>>, priva
         }
     }
 
+    /**
+     * Methode die recyclerview nodig heeft om te bepalen hoeveel items hij moet renderen.
+     *
+     * Dit is het aantal items in de meegeven lijst [postList].
+     */
     override fun getItemCount(): Int {
         return postList.value!!.size
     }
 
+    /**
+     * Vult de viewholder met de nodige data.
+     *
+     * De viewholder krijgt ook een tag zijnde de bijhorende [Post]
+     */
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val post : Post = postList.value!![position]
         holder.textTitle.text = post.title
@@ -60,7 +70,15 @@ class PostAdapter(private val postList : MutableLiveData<ArrayList<Post>>, priva
         return ViewHolder(view)
     }
 
-    class ViewHolder (itemView: View) : RecyclerView.ViewHolder(itemView){
+    /**
+     * Viewholder die:
+     * - [textTitle]
+     * - [textCategory]
+     * - [textAuthor]
+     * - [textDate]
+     * hun bijhorend UI element bijhoud om later op te vullen.
+     */
+    inner class ViewHolder (itemView: View) : RecyclerView.ViewHolder(itemView){
         val textTitle = itemView.findViewById(R.id.txt_title) as TextView
         val textCategory = itemView.findViewById(R.id.txt_category) as TextView
         val textDate = itemView.findViewById(R.id.txt_date) as TextView
