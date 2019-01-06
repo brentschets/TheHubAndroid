@@ -64,6 +64,10 @@ class RegisterFragment: Fragment() {
         btn_register.setOnClickListener{
             register()
         }
+
+        btn_register_login.setOnClickListener{
+            FragmentUtil.replace(LoginFragment(), requireActivity() as MainActivity)
+        }
     }
 
     /**
