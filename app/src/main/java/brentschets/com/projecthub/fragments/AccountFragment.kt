@@ -15,6 +15,9 @@ import brentschets.com.projecthub.databinding.FragmentAccountBinding
 import brentschets.com.projecthub.utils.FragmentUtil
 import brentschets.com.projecthub.viewmodels.AccountViewModel
 import kotlinx.android.synthetic.main.fragment_account.*
+import android.content.Intent
+import android.net.Uri
+
 
 /**
  * Een [Fragment] voor het weergeven van de gegevens van de gebruiker
@@ -69,6 +72,10 @@ class AccountFragment : Fragment() {
         //afmeldknop
         btn_account_signout.setOnClickListener{
             signOut()
+        }
+
+        btn_account_privacy.setOnClickListener{
+            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://brentschets.com/mobile/privacy%20policy/privacy.html")))
         }
     }
 
