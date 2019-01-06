@@ -36,7 +36,7 @@ De volledige code is gedocumenteerd. Alleen bij zeer logische functies werd er g
 
 ## Release en apk
 
-De release kan hier gevonden worden: [release](https://brentschets.com)
+De release kan hier gevonden worden: [release](https://github.com/HoGentTIN/native-apps-1-android-creative-app-brentschets/releases/tag/v1.0)
 
 De apk kan hier gedownload worden: [apk](http://brentschets.com/mobile/apk/ProjectHub.apk)
 
