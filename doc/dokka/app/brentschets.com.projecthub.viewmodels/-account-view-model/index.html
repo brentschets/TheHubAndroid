@@ -1,0 +1,143 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>AccountViewModel - app</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">app</a>&nbsp;/&nbsp;<a href="../index.html">brentschets.com.projecthub.viewmodels</a>&nbsp;/&nbsp;<a href="./index.html">AccountViewModel</a><br/>
+<br/>
+<h1>AccountViewModel</h1>
+<code><span class="keyword">class </span><span class="identifier">AccountViewModel</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">ViewModel</span></code>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-init-.html">&lt;init&gt;</a></p>
+</td>
+<td>
+<code><span class="identifier">AccountViewModel</span><span class="symbol">(</span><span class="symbol">)</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-t-a-g.html">TAG</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">TAG</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code>
+<p>tag om mee te geven wanneer in de log</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="is-logged-in.html">isLoggedIn</a></p>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">isLoggedIn</span><span class="symbol">: </span><span class="identifier">MutableLiveData</span><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a><span class="symbol">&gt;</span></code>
+<p>Bool of user al dan niet aangemeld is</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="is-registered.html">isRegistered</a></p>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">isRegistered</span><span class="symbol">: </span><span class="identifier">MutableLiveData</span><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a><span class="symbol">&gt;</span></code>
+<p>Bool of user al dan niet geregistreerd is</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="project-api.html">projectApi</a></p>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">projectApi</span><span class="symbol">: </span><a href="../../brentschets.com.projecthub.network/-project-hub-api/index.html"><span class="identifier">ProjectHubApi</span></a></code>
+<p><a href="../../brentschets.com.projecthub.network/-project-hub-api/index.html">ProjectHubApi</a> Instantie van de api</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="username.html">username</a></p>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">username</span><span class="symbol">: </span><span class="identifier">MutableLiveData</span><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">&gt;</span></code>
+<p>De gebruikersnaam van de aangemelde persoon</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="login.html">login</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">login</span><span class="symbol">(</span><span class="identifier" id="brentschets.com.projecthub.viewmodels.AccountViewModel$login(kotlin.String, kotlin.String)/email">email</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="brentschets.com.projecthub.viewmodels.AccountViewModel$login(kotlin.String, kotlin.String)/password">password</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Aanmelden van een gebruiker door middel van Firebase</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="on-retrieve-login-success.html">onRetrieveLoginSuccess</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">onRetrieveLoginSuccess</span><span class="symbol">(</span><span class="identifier" id="brentschets.com.projecthub.viewmodels.AccountViewModel$onRetrieveLoginSuccess(kotlin.String)/email">email</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Functie voor het behandelen van het succesvol aanmelden</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="on-retrieve-register-success.html">onRetrieveRegisterSuccess</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">onRetrieveRegisterSuccess</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Functie voor het succesvol registreren van een gebruiker</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="register.html">register</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">register</span><span class="symbol">(</span><span class="identifier" id="brentschets.com.projecthub.viewmodels.AccountViewModel$register(kotlin.String, kotlin.String, kotlin.String)/email">email</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="brentschets.com.projecthub.viewmodels.AccountViewModel$register(kotlin.String, kotlin.String, kotlin.String)/password">password</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="brentschets.com.projecthub.viewmodels.AccountViewModel$register(kotlin.String, kotlin.String, kotlin.String)/username">username</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Registreren van een gebruiker</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="sign-out.html">signOut</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">signOut</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Methode om de gebruiker af te melden</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="validate-form-login.html">validateFormLogin</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">validateFormLogin</span><span class="symbol">(</span><span class="identifier" id="brentschets.com.projecthub.viewmodels.AccountViewModel$validateFormLogin(kotlin.String, kotlin.String)/email">email</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="brentschets.com.projecthub.viewmodels.AccountViewModel$validateFormLogin(kotlin.String, kotlin.String)/password">password</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code>
+<p>Validatie op het login form</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="validate-form-register.html">validateFormRegister</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">validateFormRegister</span><span class="symbol">(</span><span class="identifier" id="brentschets.com.projecthub.viewmodels.AccountViewModel$validateFormRegister(kotlin.String, kotlin.String)/email">email</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="brentschets.com.projecthub.viewmodels.AccountViewModel$validateFormRegister(kotlin.String, kotlin.String)/password">password</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code>
+<p>Validatie op het registreer form</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>
