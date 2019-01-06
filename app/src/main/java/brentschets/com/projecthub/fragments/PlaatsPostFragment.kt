@@ -8,6 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import brentschets.com.projecthub.R
+import brentschets.com.projecthub.activities.MainActivity
+import brentschets.com.projecthub.utils.FragmentUtil
 import kotlinx.android.synthetic.main.fragment_plaats_post.*
 import brentschets.com.projecthub.viewmodels.*
 
@@ -36,8 +38,7 @@ class PlaatsPostFragment : Fragment(), View.OnClickListener{
         if(i == R.id.btn_post_submit){
             if(postViewModel.validateForm(txt_post_titel.text.toString(), sp_post_category.selectedItem.toString(),txt_post_message.text.toString())){
                 postViewModel.savePost(txt_post_titel.text.toString(), sp_post_category.selectedItem.toString(),txt_post_message.text.toString())
-                txt_post_titel.text.clear()
-                txt_post_message.text.clear()
+                FragmentUtil.replace(PostListFragment(), requireActivity() as MainActivity)
             }
         }
     }
