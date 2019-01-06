@@ -9,7 +9,6 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import brentschets.com.projecthub.R
 import brentschets.com.projecthub.activities.MainActivity
 import brentschets.com.projecthub.databinding.FragmentAccountBinding
@@ -21,7 +20,7 @@ import kotlinx.android.synthetic.main.fragment_account.*
  * Een [Fragment] voor het weergeven van de gegevens van de gebruiker
  *
  */
-class AccountFragment : Fragment(), View.OnClickListener {
+class AccountFragment : Fragment() {
 
 
     /**
@@ -47,18 +46,8 @@ class AccountFragment : Fragment(), View.OnClickListener {
         binding.accountViewModel = accountViewModel
         binding.setLifecycleOwner(activity)
 
-        val btnLogOut = view.findViewById<Button>(R.id.btn_account_signout)
-        btnLogOut.setOnClickListener(this)
-
 
         return view
-    }
-
-    override fun onClick(view: View?) {
-        val i = view!!.id
-        if(i == R.id.btn_account_signout){
-            signOut()
-        }
     }
 
     /**
@@ -76,6 +65,11 @@ class AccountFragment : Fragment(), View.OnClickListener {
                 FragmentUtil.replace(LoginFragment(), requireActivity() as MainActivity)
             }
         })
+
+        //afmeldknop
+        btn_account_signout.setOnClickListener{
+            signOut()
+        }
     }
 
     /**
