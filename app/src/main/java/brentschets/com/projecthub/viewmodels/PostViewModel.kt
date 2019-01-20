@@ -4,7 +4,6 @@ import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import android.text.TextUtils
 import brentschets.com.projecthub.context.App
-import brentschets.com.projecthub.database.PostDao
 import brentschets.com.projecthub.model.Post
 import brentschets.com.projecthub.network.ProjectHubApi
 import brentschets.com.projecthub.repositories.PostRepository
@@ -17,14 +16,13 @@ import org.jetbrains.anko.doAsync
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
-import kotlin.collections.ArrayList
 
 class PostViewModel: ViewModel() {
 
     /**
      * Een lijst met alle posts
      */
-    var postList = MutableLiveData<ArrayList<Post>>()
+    var postList = MutableLiveData<List<Post>>()
         private set
     /**
      * Een repository object voor de persistence van de posts
@@ -35,7 +33,7 @@ class PostViewModel: ViewModel() {
     /**
      * Lijst van alle posts
      */
-    var posts = ArrayList<Post>()
+    lateinit var posts: List<Post>
 
     /**
      * De geselecteerde lunch
@@ -91,7 +89,7 @@ class PostViewModel: ViewModel() {
     fun getPosts(){
         val dbRef = projectApi.postRef
 
-        posts = ArrayList()
+        val posts = ArrayList<Post>()
 
         dbRef!!.addValueEventListener(object : ValueEventListener{
 
@@ -127,7 +125,7 @@ class PostViewModel: ViewModel() {
         isOwnerPost.value = PreferenceUtil.getUsername() == post.owner
     }
 
-    private fun addPostRoom(posts: ArrayList<Post>){
+    private fun addPostRoom(posts: List<Post>){
         doAsync{
             postRepo.insert(posts)
         }

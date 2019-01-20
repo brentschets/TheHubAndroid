@@ -14,7 +14,7 @@ import brentschets.com.projecthub.model.Post
 import brentschets.com.projecthub.utils.FragmentUtil
 import brentschets.com.projecthub.viewmodels.PostViewModel
 
-class PostAdapter(private val postList : MutableLiveData<ArrayList<Post>>, private val parentActivity: MainActivity) : RecyclerView.Adapter<PostAdapter.ViewHolder> () {
+class PostAdapter(private val postList : MutableLiveData<List<Post>>, private val parentActivity: MainActivity) : RecyclerView.Adapter<PostAdapter.ViewHolder> () {
 
     /**
      * [PostViewModel] met de data over account

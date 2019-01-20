@@ -28,7 +28,7 @@ class PostListFragment : Fragment() {
     /**
      * Lijst van posts
      */
-    private lateinit var postList: MutableLiveData<ArrayList<Post>>
+    private lateinit var postList: MutableLiveData<List<Post>>
 
     /**
      * [PostAdapter] die de lijst vult.
