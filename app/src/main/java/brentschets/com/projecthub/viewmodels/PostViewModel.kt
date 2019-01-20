@@ -3,6 +3,7 @@ package brentschets.com.projecthub.viewmodels
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import android.text.TextUtils
+import brentschets.com.projecthub.context.App
 import brentschets.com.projecthub.database.PostDao
 import brentschets.com.projecthub.model.Post
 import brentschets.com.projecthub.network.ProjectHubApi
@@ -28,7 +29,6 @@ class PostViewModel: ViewModel() {
     /**
      * Een repository object voor de persistence van de posts
      */
-    @Inject
     lateinit var postRepo: PostRepository
 
     /**
@@ -55,10 +55,10 @@ class PostViewModel: ViewModel() {
         private set
 
     init {
-
+        App.injector.inject(this)
         getPosts()
         isOwnerPost.value = false
-        roomPosts = postRepo!!.posts
+        roomPosts = postRepo.posts
         postList.value = posts
     }
 
@@ -128,7 +128,7 @@ class PostViewModel: ViewModel() {
 
     private fun addPostRoom(posts: ArrayList<Post>){
         doAsync{
-            postRepo!!.insert(posts)
+            postRepo.insert(posts)
         }
     }
 
