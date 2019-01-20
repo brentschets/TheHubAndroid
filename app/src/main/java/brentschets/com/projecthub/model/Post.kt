@@ -1,6 +1,10 @@
 package brentschets.com.projecthub.model
 
-class Post (val id : String,
+import android.arch.persistence.room.Entity
+import android.arch.persistence.room.PrimaryKey
+
+@Entity(tableName = "post_table")
+class Post (@PrimaryKey val id : String,
             val title : String,
             val owner : String?,
             val date : String,

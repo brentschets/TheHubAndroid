@@ -3,15 +3,19 @@ package brentschets.com.projecthub.viewmodels
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import android.text.TextUtils
+import brentschets.com.projecthub.database.PostDao
 import brentschets.com.projecthub.model.Post
 import brentschets.com.projecthub.network.ProjectHubApi
+import brentschets.com.projecthub.repositories.PostRepository
 import brentschets.com.projecthub.utils.MessageUtil
 import brentschets.com.projecthub.utils.PreferenceUtil
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
+import org.jetbrains.anko.doAsync
 import java.text.SimpleDateFormat
 import java.util.*
+import javax.inject.Inject
 import kotlin.collections.ArrayList
 
 class PostViewModel: ViewModel() {
@@ -21,6 +25,11 @@ class PostViewModel: ViewModel() {
      */
     var postList = MutableLiveData<ArrayList<Post>>()
         private set
+    /**
+     * Een repository object voor de persistence van de posts
+     */
+    @Inject
+    lateinit var postRepo: PostRepository
 
     /**
      * Lijst van alle posts
@@ -42,9 +51,14 @@ class PostViewModel: ViewModel() {
      */
     var projectApi = ProjectHubApi()
 
+    var roomPosts = MutableLiveData<ArrayList<Post>>()
+        private set
+
     init {
+
         getPosts()
         isOwnerPost.value = false
+        roomPosts = postRepo!!.posts
         postList.value = posts
     }
 
@@ -92,6 +106,7 @@ class PostViewModel: ViewModel() {
                         posts.add(post!!)
                     }
                     postList.value = posts
+                    addPostRoom(posts)
                 }
             }
         })
@@ -109,6 +124,12 @@ class PostViewModel: ViewModel() {
 
     fun ownerPost(post: Post){
         isOwnerPost.value = PreferenceUtil.getUsername() == post.owner
+    }
+
+    private fun addPostRoom(posts: ArrayList<Post>){
+        doAsync{
+            postRepo!!.insert(posts)
+        }
     }
 
 
