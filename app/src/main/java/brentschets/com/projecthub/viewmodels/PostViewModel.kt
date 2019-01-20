@@ -29,6 +29,7 @@ class PostViewModel: ViewModel() {
     /**
      * Een repository object voor de persistence van de posts
      */
+    @Inject
     lateinit var postRepo: PostRepository
 
     /**
@@ -51,14 +52,14 @@ class PostViewModel: ViewModel() {
      */
     var projectApi = ProjectHubApi()
 
-    var roomPosts = MutableLiveData<ArrayList<Post>>()
+    var roomPosts = MutableLiveData<List<Post>>()
         private set
 
     init {
         App.injector.inject(this)
         getPosts()
         isOwnerPost.value = false
-        roomPosts = postRepo.posts
+        roomPosts.value = postRepo.posts
         postList.value = posts
     }
 

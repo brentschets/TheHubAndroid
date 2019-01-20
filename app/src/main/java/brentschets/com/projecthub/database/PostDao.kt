@@ -1,7 +1,6 @@
 package brentschets.com.projecthub.database
 
 import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.MutableLiveData
 import android.arch.persistence.room.Dao
 import android.arch.persistence.room.Insert
 import android.arch.persistence.room.Query
@@ -21,7 +20,7 @@ interface PostDao {
      * Returnt alle [Post] objecten uit de room database
      */
     @Query("SELECT * FROM post_table")
-    fun getAllPosts(): MutableLiveData<ArrayList<Post>>
+    fun getAllPosts(): List<Post>
 
     /**
      * Verwijderd alle [Post] objecten uit de room database

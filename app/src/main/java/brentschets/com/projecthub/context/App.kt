@@ -5,7 +5,6 @@ import brentschets.com.projecthub.injection.components.DaggerNetworkComponent
 import brentschets.com.projecthub.injection.components.NetworkComponent
 import brentschets.com.projecthub.injection.modules.NetworkModule
 
-@Suppress("DEPRECATION")
 class App: Application() {
 
     /**
@@ -17,6 +16,9 @@ class App: Application() {
 
     override fun onCreate() {
         super.onCreate()
-        injector = DaggerNetworkComponent.builder().networkModule(NetworkModule(this)).build()
+        injector = DaggerNetworkComponent.
+                builder().
+                networkModule(NetworkModule(this)).
+                build()
     }
 }

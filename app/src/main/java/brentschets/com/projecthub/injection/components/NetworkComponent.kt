@@ -15,9 +15,9 @@ import javax.inject.Singleton
 @Component(modules = [NetworkModule::class])
 interface NetworkComponent {
     /**
-     * Doet dependency injection op de meegegeven [OrderViewModel]
+     * Doet dependency injection op de meegegeven [PostViewModel]
      *
-     * @param orderViewModel De [OrderViewModel] dat je wilt voorzien van dependency injection. Verplicht van type [OrderViewModel].
+     * @param postViewModel De [OrPostViewModelderViewModel] dat je wilt voorzien van dependency injection. Verplicht van type [PostViewModel].
      */
     fun inject(postViewModel: PostViewModel)
 }
